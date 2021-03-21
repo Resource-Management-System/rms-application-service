@@ -13,13 +13,14 @@ public class TargetApplicationBuilder {
     public static final Long APPLICATION_ID = 1L;
     public static final Long ROLE_ID = 2L;
     public static final Long APPLICANT_ID = 3L;
+    public static final Long RM_ID = 4L;
 
 
     public static TargetApplication buildTargetApplication() {
         return TargetApplication.builder()
                 .applicantId(APPLICANT_ID)
                 .accountId("1")
-                .applicationDate(LocalDate.of(2010, 1, 1))
+                .applicationDate(LocalDate.now())
                 .applicationId(APPLICATION_ID)
                 .applicationStatus(ApplicationStatus.SUBMITTED)
                 .businessUnitId(1L)

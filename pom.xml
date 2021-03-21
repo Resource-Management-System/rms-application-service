@@ -25,7 +25,6 @@
         <lombok.version>1.18.16</lombok.version>
         <!-- testing -->
         <spring.test.version>2.4.2</spring.test.version>
-        <junit.version>5.7.0</junit.version>
         <mockito.version>3.6.28</mockito.version>
         <jupiter.sf.provider.version>1.3.2</jupiter.sf.provider.version>
         <localstack.utils.version>0.2.2</localstack.utils.version>
@@ -153,12 +152,12 @@
                                         <limit>
                                             <counter>LINE</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.0</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                         <limit>
                                             <counter>BRANCH</counter>
                                             <value>COVEREDRATIO</value>
-                                            <minimum>0.0</minimum>
+                                            <minimum>0.80</minimum>
                                         </limit>
                                     </limits>
                                     <excludes>

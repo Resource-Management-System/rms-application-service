@@ -5,6 +5,7 @@ import callum.project.uni.rms.applications.model.source.Shortlist;
 import callum.project.uni.rms.applications.model.target.TargetShortlist;
 import callum.project.uni.rms.applications.model.target.TargetShortlistItem;
 import callum.project.uni.rms.applications.service.repository.ShortlistRepository;
+import callum.project.uni.rms.parent.exception.InternalServiceException;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.hibernate.HibernateException;
@@ -30,7 +31,7 @@ public class ShortlistService {
             return shortlistMapper.mapSourceToTarget(shortlistRepository.save(shortlist));
         } catch (HibernateException e) {
             log.error(e.getMessage());
-            throw new ServiceException("Error saving shortlist", e);
+            throw new InternalServiceException("Error saving shortlist", e);
         }
     }
 
@@ -39,7 +40,7 @@ public class ShortlistService {
             shortlistRepository.deleteByRoleIdAndUserId(roleId, userId);
         } catch (HibernateException e) {
             log.error(e.getMessage());
-            throw new ServiceException("Error retrieving candidates", e);
+            throw new InternalServiceException("Error retrieving candidates", e);
         }
     }
 
@@ -50,17 +51,17 @@ public class ShortlistService {
             return buildTargetShortlist(shortlist);
         } catch (HibernateException e) {
             log.error(e.getMessage());
-            throw new ServiceException("Error retrieving candidates", e);
+            throw new InternalServiceException("Error retrieving candidates", e);
         }
     }
 
     public void removeShortlistForRole(Long roleId) {
         try {
-            shortlistRepository.findAllByRoleId(roleId);
+            shortlistRepository.deleteAllByRoleId(roleId);
 
         } catch (HibernateException e) {
             log.error(e.getMessage());
-            throw new ServiceException("Error retrieving candidates", e);
+            throw new InternalServiceException("Error retrieving candidates", e);
         }
     }
 
@@ -73,8 +74,7 @@ public class ShortlistService {
         } catch (
                 HibernateException e) {
             log.error(e.getMessage());
-            throw new ServiceException("Error retrieving candidates", e);
-
+            throw new InternalServiceException("Error retrieving candidates", e);
         }
     }
 

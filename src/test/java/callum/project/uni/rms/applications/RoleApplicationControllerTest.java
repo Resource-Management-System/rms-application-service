@@ -22,6 +22,7 @@ import org.springframework.test.web.servlet.ResultActions;
 import java.time.LocalDate;
 import java.util.List;
 
+import static callum.project.uni.rms.applications.helper.AssertionHelper.assertApplication;
 import static callum.project.uni.rms.applications.helper.TargetApplicationBuilder.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -43,8 +44,6 @@ class RoleApplicationControllerTest {
 
     @Autowired
     private ObjectMapper objectMapper;
-
-    private static final Long RM_ID = 4L;
 
     @Test
     void getApplicationForUser_happyPath() throws Exception {
@@ -242,17 +241,5 @@ class RoleApplicationControllerTest {
                 .andExpect(status().isInternalServerError());
         verify(service, times(1))
                 .addNewApplication(eq(roleCreateReq));
-    }
-
-
-    private void assertApplication(TargetApplication application) {
-        assertEquals("1", application.getAccountId());
-        assertEquals("1", application.getProjectId());
-        assertEquals(APPLICANT_ID, application.getApplicantId());
-        assertEquals(LocalDate.of(2010, 1, 1), application.getApplicationDate());
-        assertEquals(1L, application.getBusinessUnitId());
-        assertEquals(ROLE_ID, application.getRoleId());
-        assertEquals(ApplicationStatus.SUBMITTED, application.getApplicationStatus());
-        assertEquals(APPLICATION_ID, application.getApplicationId());
     }
 }
